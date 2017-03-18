@@ -1,22 +1,16 @@
 {
-  "name": "nboiler",
+  "name": "ghpages-bot",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=nboiler node ./bin/www"
+    "start": "node app.js"
   },
   "dependencies": {
-    "body-parser": "~1.0.0",
-    "browserify": "5.9.1",
-    "cookie-parser": "~1.0.1",
-    "debug": "~0.7.4",
+    "async": "^2.1.5",
+    "bluebird": "^3.5.0",
     "express": "~3.4.8",
-    "less-middleware": "0.1.15",
-    "lodash": "2.4.1",
-    "marked": "^0.3.5",
-    "morgan": "~1.0.0",
-    "nunjucks": "1.0.5",
-    "static-favicon": "~1.0.0",
-    "watchify": "1.0.0"
+    "github-api": "^3.0.0",
+    "lodash": "^2.4.1",
+    "request": "^2.81.0"
   }
 }
