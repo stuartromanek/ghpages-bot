@@ -14,6 +14,7 @@ var assets = {
 
   vendorPrefix: '/js/vendor/',
   vendor: [
+    'jquery/dist/jquery.js'
   ]
 };
 

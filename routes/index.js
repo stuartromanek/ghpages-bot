@@ -3,9 +3,23 @@ var assets = require('./assets');
 
 module.exports = function(app) {
 
-  app.get('/', function(req, res) {
-    return render(res, 'index.html');
+  // app.get('/', function(req, res) {
+  // 	var data = { items: [ {name: 'jimmy'}, {name: 'Suzy'} ] };
+  //   return render(res, 'index.html', data);
+  // });
+
+ app.get('/', function(req, res) {
+    var data = { items : [
+      { name: 'item 1' },
+      { name: 'item 2' }
+    ]}
+    return render(res, 'index.html', data);
   });
+
+ app.post('/api/markdown', function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ a: 1 }));
+ });
 
 };
 

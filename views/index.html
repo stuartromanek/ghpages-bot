@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
 {% block main %}
-  Hi
+	{% for item in items %}
+		{{ item.name }}
+	{% endfor %}
+
+
+	<textarea name="" id="text" cols="30" rows="10"></textarea>
+	<a href="#" data-send class="button">Send</a>
 {% endblock %}
+

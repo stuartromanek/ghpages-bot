@@ -13,5 +13,22 @@
   {% for asset in assets %}
     <script type="text/javascript" src="{{ asset }}"></script>
   {% endfor %}
+
+  <script>
+  $(function(){
+  	$button = $('[data-send]');
+
+  	$button.on('click', function(){
+		$.ajax({
+		  method: "POST",
+		  url: "/api/markdown",
+		  data: { name: "John", location: "Boston" }
+		}).done(function( msg ) {
+				console.log(msg);
+		    $('textarea').text(msg)
+		  });
+  	});
+  });
+  </script>
 </body>
 </html>
