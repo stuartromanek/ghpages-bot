@@ -2,7 +2,7 @@ var async = require('async');
 var github = require('./lib/github');
 var request = require('request');
 var _ = require('lodash');
-
+console.log('heloo');
 var ghToken = 'bc5b18a4ccebe52ce4a1689b8770177050d03059';
 
 async.waterfall([
