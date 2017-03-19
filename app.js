@@ -1,18 +1,18 @@
 var async = require('async');
-var github = require('./lib/github');
 var request = require('request');
 var _ = require('lodash');
-console.log('heloo');
-var ghToken = 'bc5b18a4ccebe52ce4a1689b8770177050d03059';
+var schedule = require('node-schedule');
+
+var github = require('./lib/github');
+var local = require('./local.js');
+
 
 async.waterfall([
   function(callback){
-    console.log('joe testt');
-    console.log('first');
     request({
       method: 'GET',
-      oauth_token: ghToken,
-      headers: { 'User-Agent': 'request' },
+      oauth_token: local.ghToken,
+      headers: { 'User-Agent': 'ghpages-bot' },
       uri: 'https://api.github.com/search/repositories',
       qs: {
         q: 'node',
@@ -24,36 +24,49 @@ async.waterfall([
         console.log(error);
       }
       var results = JSON.parse(body); 
+      console.log(results.items.length);
       callback(null, results.items);
     })
   },
   function(items, callback) {
     items = _.shuffle(items);
+    console.log(items.length);
     items.forEach(function(repo) {
+      console.log('inside each');
       request({
         method: 'GET',
-        oauth_token: ghToken,
-        headers: { 'User-Agent': 'request'},
+        oauth_token: local.ghToken,
+        headers: { 'User-Agent': 'ghpages-bot' },
         uri: repo.branches_url.split('{')[0]
       }, function(error, response, body) {
+        console.log(response.headers);
         var branches = JSON.parse(body);
         if (branches.length) {
          branches.forEach(function(branch) {
+            console.log(branch.name);
             if (branch.name === 'gh-pages') {
-              callback(null, response);    
+              console.log('hello');
+              console.log(branches);
+              return callback(null, response);    
             }
           })
         }
       })
     })
-    // console.log();
-    // console.log('second');
-    // callback(null)
-  },
-  function(response, callback) {
-    console.log(response);
-    callback(null)
   }
 ], function (err, result) {
   console.log('done'); 
+
 });
+
+
+
+// schedule syntax for later
+
+// var app = function() {
+//   console.log('hello');
+// }
+
+// var j = schedule.scheduleJob({ rule: '*/1 * * * * *' }, function(){
+//   app();
+// });
