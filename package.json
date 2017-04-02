@@ -6,12 +6,14 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "adjectives": "^1.0.1",
     "async": "^2.1.5",
     "bluebird": "^3.5.0",
     "express": "~3.4.8",
     "github-api": "^3.0.0",
     "lodash": "^2.4.1",
     "node-schedule": "^1.2.1",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "twit": "^2.2.5"
   }
 }
