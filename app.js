@@ -8,22 +8,24 @@ var github = require('./lib/github');
 var twitter = require('./lib/twitter');
 var local = require('./local');
 
-
 // schedule syntax
 
 var j = schedule.scheduleJob({ rule: '*/10 * * * * *' }, function(){
   var myAdj = _.shuffle(adjectives)[0];
-  github.getRepos({ topic: myAdj }, function (error, res, body) {
+  github.getRepos({ q: myAdj }, function (error, res, body) {
     if (error) {
       console.log(error);
     }
     var results = JSON.parse(body); 
 
-    return github.getBranch(results.items, function(goods) {
-      twitter.tweet(_.shuffle(goods)[0], function(){
-        console.log("myAdj: "+ myAdj);
-        console.log('we done');
-      })
+    return github.findGhPages(results.items, function(goods) {
+      if (goods.length) {
+        twitter.tweet(_.shuffle(goods)[0], function(){
+          console.log('finished');
+        })
+      } else {
+        console.log('no result');
+      }
     });
   });
 });
