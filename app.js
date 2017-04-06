@@ -4,11 +4,10 @@ var adjectives = require('adjectives');
 var _ = require('lodash');
 var schedule = require('node-schedule');
 
+
 var github = require('./lib/github');
 var twitter = require('./lib/twitter');
 var local = require('./local');
-
-// schedule syntax
 
 var j = schedule.scheduleJob({ rule: '*/10 * * * * *' }, function(){
   var myAdj = _.shuffle(adjectives)[0];
@@ -20,9 +19,12 @@ var j = schedule.scheduleJob({ rule: '*/10 * * * * *' }, function(){
 
     return github.findGhPages(results.items, function(goods) {
       if (goods.length) {
-        twitter.tweet(_.shuffle(goods)[0], function(){
-          console.log('finished');
-        })
+        var theRepo = _.shuffle(goods)[0];
+        return github.getGhImg(theRepo, function(repo) {
+          twitter.tweet(repo, function(){
+            console.log('finished');
+          })
+        });
       } else {
         console.log('no result');
       }
