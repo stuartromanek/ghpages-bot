@@ -3,5 +3,6 @@
 /public/js/_site.js
 /public/css/site.css
 .DS_Store
+.env
 npm-debug.log
 local.js
