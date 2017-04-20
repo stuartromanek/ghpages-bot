@@ -5,10 +5,15 @@ var adjectives = require('adjectives');
 var _ = require('lodash');
 var schedule = require('node-schedule');
 
+console.log('STARTING UP');
+
+if (!process.env.twConsumerKey) {
+  console.log('dont have vars');
+  process.exit(1);
+}
+
 var github = require('./lib/github');
 var twitter = require('./lib/twitter');
-
-console.log('STARTING UP');
 
 var j = schedule.scheduleJob({hour: 7, minute: 30}, function(){
 
