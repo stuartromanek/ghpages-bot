@@ -4,6 +4,7 @@ var request = require('request');
 var adjectives = require('adjectives');
 var _ = require('lodash');
 var schedule = require('node-schedule');
+var http = require('http');
 
 console.log('STARTING UP');
 
@@ -48,3 +49,10 @@ var j = schedule.scheduleJob({hour: 7, minute: 30}, function(){
   }
 
 });
+
+// try to make heroku happy
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+}).listen(process.env.PORT || 3000);
+
+console.log('this is the end');
