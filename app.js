@@ -16,7 +16,7 @@ if (!process.env.twConsumerKey) {
 var github = require('./lib/github');
 var twitter = require('./lib/twitter');
 
-var j = schedule.scheduleJob({hour: 7, minute: 30}, function(){
+var j = schedule.scheduleJob({hour: 14, minute: 30}, function(){
 
   function run (repo, callback) {
     console.log('running');
