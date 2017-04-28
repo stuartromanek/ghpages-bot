@@ -42,6 +42,10 @@ var timesToRun = Math.floor(Math.random() * 10) + 1;
 
 for (var i = timesToRun - 1; i >= 0; i--) {
   run();
+  console.log(i);
+  if (i === 0) {
+    process.exit();
+  }
 }
 
 console.log('this is the end');
